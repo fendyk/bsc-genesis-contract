@@ -19,20 +19,35 @@ contract System {
   uint8 constant public SLASH_CHANNELID = 0x0b;
   uint16 constant public bscChainID = 0x0060;
 
-  address public constant VALIDATOR_CONTRACT_ADDR = 0x0000000000000000000000000000000000001000;
-  address public constant SLASH_CONTRACT_ADDR = 0x0000000000000000000000000000000000001001;
-  address public constant SYSTEM_REWARD_ADDR = 0x0000000000000000000000000000000000001002;
-  address public constant LIGHT_CLIENT_ADDR = 0x0000000000000000000000000000000000001003;
-  address public constant TOKEN_HUB_ADDR = 0x0000000000000000000000000000000000001004;
-  address public constant INCENTIVIZE_ADDR=0x0000000000000000000000000000000000001005;
-  address public constant RELAYERHUB_CONTRACT_ADDR = 0x0000000000000000000000000000000000001006;
-  address public constant GOV_HUB_ADDR = 0x0000000000000000000000000000000000001007;
-  address public constant TOKEN_MANAGER_ADDR = 0x0000000000000000000000000000000000001008;
-  address public constant CROSS_CHAIN_CONTRACT_ADDR = 0x0000000000000000000000000000000000002000;
+  address public  VALIDATOR_CONTRACT_ADDR;
+  address public  SLASH_CONTRACT_ADDR;
+  address public  SYSTEM_REWARD_ADDR;
+  address public  LIGHT_CLIENT_ADDR;
+  address public  TOKEN_HUB_ADDR;
+  address public INCENTIVIZE_ADDR;
+  address public RELAYERHUB_CONTRACT_ADDR;
+  address public GOV_HUB_ADDR;
+  address public TOKEN_MANAGER_ADDR;
+  address public CROSS_CHAIN_CONTRACT_ADDR;
 
+  function updateContractAddr(address valAddr, address slashAddr, address rewardAddr, address lightAddr, address tokenHubAddr,
+  address incentivizeAddr, address relayerHubAddr, address govHub, address tokenManagerAddr, address crossChain) external {
+    VALIDATOR_CONTRACT_ADDR = valAddr;
+    SLASH_CONTRACT_ADDR = slashAddr;
+    SYSTEM_REWARD_ADDR = rewardAddr;
+    LIGHT_CLIENT_ADDR = lightAddr;
+    TOKEN_HUB_ADDR = tokenHubAddr;
+    INCENTIVIZE_ADDR = incentivizeAddr;
+    RELAYERHUB_CONTRACT_ADDR = relayerHubAddr;
+    GOV_HUB_ADDR = govHub;
+    TOKEN_MANAGER_ADDR = tokenManagerAddr;
+    CROSS_CHAIN_CONTRACT_ADDR = crossChain;
+  }
+
+  address public constant SYSTEM_ADDRESS = 0x9fB29AAc15b9A4B7F17c3385939b007540f4d791;
 
   modifier onlyCoinbase() {
-    require(msg.sender == block.coinbase, "the message sender must be the block producer");
+    require(msg.sender == SYSTEM_ADDRESS, "the message sender must be the block producer");
     _;
   }
 
